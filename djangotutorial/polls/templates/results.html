@@ -6,11 +6,16 @@
 </head>
 <body>
     <h1>{{ question.question_text }}</h1>
-    <ul>
-        {% for choice in question.choice_set.all %}
-            <li>{{ choice.choice_text }} — {{ choice.votes }} голосов</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'detail' question.id %}">Вернуться к голосованию</a>
+    <div class="results-container">
+        <ul>
+            {% for choice in question.choice_set.all %}
+                <li>
+                    <span class="choice-text">{{ choice.choice_text }}</span> —
+                    <span class="choice-votes">{{ choice.votes }} голосов</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'polls:detail' question.id %}" class="back-link">Вернуться к голосованию</a>
+    </div>
 </body>
 </html>
