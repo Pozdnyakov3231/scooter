@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление самокатами</title>
+</head>
+<body>
+    <h1>Список самокатов</h1>
+    {% if all_scooters %}
+        <table border="1">
+            <tr>
+                <th>Модель</th>
+                <th>Заряд батареи</th>
+                <th>Статус</th>
+                <th>Последнее обслуживание</th>
+                <th>Действия</th>
+            </tr>
+            {% for scooter in all_scooters %}
+                <tr>
+                    <td>{{ scooter.model }}</td>
+                    <td>{{ scooter.battery_level }}/{{ scooter.battery_capacity }}</td>
+                    <td>{{ scooter.get_status_display }}</td>
+                    <td>{{ scooter.last_maintenance_date|date:"d.m.Y H:i:s" }}</td>
+                    <td>
+                        <a href="{% url 'change_scooter_status' scooter.id %}">Изменить статус</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Самокатов нет.</p>
+    {% endif %}
+</body>
+</html>
